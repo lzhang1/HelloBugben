@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">HelloBugben</string>
+    <string name="str_textview01">Bugben 微信公众号：巴哥奔</string>
+    <string name="str_textview02">Bugben QQ：1971629467</string>
+</resources>
