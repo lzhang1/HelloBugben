@@ -20,8 +20,8 @@ import android.widget.EditText;
 import org.w3c.dom.Text;
 
 
-public class ApplicationTest extends ActivityInstrumentationTestCase2<ChangeActivity>{
-    public ApplicationTest(){
+public class instrumentationAppTest extends ActivityInstrumentationTestCase2<ChangeActivity>{
+    public instrumentationAppTest(){
         super(ChangeActivity.class);
     }
 
