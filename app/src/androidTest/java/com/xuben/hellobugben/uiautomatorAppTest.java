@@ -65,11 +65,30 @@ public class uiautomatorAppTest {
         } catch (RemoteException e) {
             e.printStackTrace();
         }
+
         mDevice.pressHome();
         Intent myIntent = mContext.getPackageManager().getLaunchIntentForPackage(APP);  //启动app
         myIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         mContext.startActivity(myIntent);
+        //Log.v("testUI", String.valueOf(mDevice.waitForWindowUpdate(APP, 5000)));
         mDevice.wait(Until.hasObject(By.pkg(APP).depth(0)), 5000);
+        Log.v("testUI", String.valueOf(mDevice.getDisplaySizeDp()));
+        int h = mDevice.getDisplayHeight()/2;
+        int w = mDevice.getDisplayWidth()/2;
+        mDevice.swipe( h, w, h, 0,14);
+	//
+//        //Log.v("testUI", String.valueOf(Until.hasObject(By.pkg(APP))));
+//        if (mDevice.isNaturalOrientation()){
+//            Log.v("testUI", String.valueOf(mDevice.getCurrentPackageName()));
+//            Log.v("testUI", String.valueOf(mDevice.getProductName()));
+//
+//        }
+
+//        try {
+//            mDevice.unfreezeRotation();
+//        } catch (RemoteException e) {
+//            e.printStackTrace();
+//        }
     }
 
     @Test
@@ -78,35 +97,32 @@ public class uiautomatorAppTest {
         //mDevice.findObject(By.text("Bugben微信：巴哥奔")).setText(bugben_txt1);
         //mDevice.findObject(By.clazz("android.widget.EditText").minDepth(5)).setText(bugben_txt1);
         //mDevice.findObject(By.clazz("android.widget.EditText").maxDepth(5)).setText(bugben_txt1);
+        //Log.v("testUI", String.valueOf(mDevice.findObject(By.checked(true))));
+        //Log.v("testUI", String.valueOf(mDevice.findObject(By.textContains("Bugben"))));
+        //Log.v("testUI", String.valueOf(mDevice.findObject(By.pkg(APP))));
+        //Log.v("testUI", String.valueOf(mDevice.findObject(By.longClickable(true))));
+//        Pattern p = Pattern.compile("BugbenQQ：[0-9]{10}+");
+//        Log.v("testUI", String.valueOf(mDevice.findObject(By.text(p))));
         mDevice.findObject(By.clazz("android.widget.EditText").depth(5)).setText(bugben_txt1);
         mDevice.findObject(By.res(APP, "txt2")).setText(bugben_txt2);
         mDevice.findObject(By.res(APP, "bold")).click();
         //assertEquals(mDevice.findObject(By.text("加粗")).isChecked(),true);
         mDevice.findObject(By.res(APP, "big")).click();
         assertEquals(mDevice.findObject(By.text("大号")).isChecked(),true);
+        //Log.v("testUI", String.valueOf(mDevice.findObject(By.checked(true))));
+        //Log.v("testUI", String.valueOf(mDevice.findObject(By.scrollable(true))));
+        //Log.v("testUI", String.valueOf(mDevice.waitForWindowUpdate(APP, 500)));
         mDevice.findObject(By.res(APP, "myButton01")).click();
+        //Log.v("testUI", String.valueOf(mDevice.waitForWindowUpdate(APP, 500)));
 
-        mDevice.registerWatcher("checkPoint", new UiWatcher() {
-            @Override
-            public boolean checkForCondition() {
-                if(mDevice.hasObject(By.text("巴哥本"))){
-                    Log.v("testUI", "Found it");
-                    return true;
-                }
-                Log.v("testUI", "Not found it");
-                return false;
-            }
-        });
-        //mDevice.resetWatcherTriggers();
         UiObject2 changedText01 = mDevice
                 .wait(Until.findObject(By.res(APP, "myTextView01")),500);
         assertEquals(bugben_txt1, changedText01.getText().toString());
+
         UiObject2 changedText02 = mDevice
                 .wait(Until.findObject(By.res(APP, "myTextView02")),500);
         assertEquals(bugben_txt2, changedText02.getText().toString());
 
-//        mDevice.resetWatcherTriggers();
-//        mDevice.removeWatcher("testWatcher");
     }
 
 }
